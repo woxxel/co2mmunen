@@ -26,7 +26,6 @@ class Calculator extends Component {
                     formElement: null,
                     formOptions: null,
                     selected: false,
-                    checked: true
                 },
                 opt2: {
                     costs: 8,
@@ -35,7 +34,6 @@ class Calculator extends Component {
                     formElement: null,
                     formOptions: null,
                     selected: false,
-                    checked: false
                 },
                 checked: 'opt1',
                 arc: 6,
@@ -49,7 +47,6 @@ class Calculator extends Component {
                     formElement: null,
                     formOptions: null,
                     selected: false,
-                    checked: true
                 },
                 opt2: {
                     costs: 10,
@@ -58,7 +55,6 @@ class Calculator extends Component {
                     formElement: null,
                     formOptions: null,
                     selected: false,
-                    checked: false
                 },
                 checked: 'opt1',
                 arc: 5,
@@ -72,7 +68,6 @@ class Calculator extends Component {
                     formElement: null,
                     formOptions: null,
                     selected: false,
-                    checked: true
                 },
                 opt2: {
                     costs: 2,
@@ -81,7 +76,6 @@ class Calculator extends Component {
                     formElement: null,
                     formOptions: null,
                     selected: false,
-                    checked: false
                 },
                 checked: 'opt1',
                 arc: 4,
@@ -157,7 +151,6 @@ class Calculator extends Component {
                 label: 'neues Projekt',
                 formElement: plannedContentForm,
                 formOptions: categoriesForm,
-                checked: true,
             },
             opt2: {
                 costs: cost,
@@ -165,7 +158,6 @@ class Calculator extends Component {
                 label: 'neues Projekt',
                 formElement: plannedContentForm,
                 formOptions: categoriesForm,
-                checked: false,
             },
             checked: 'opt1',
             arc: cost/this.state.totalBudget * 360,
@@ -217,7 +209,7 @@ class Calculator extends Component {
         updatedElement[key].costs = costs;
         updatedElement.arc = costs/this.state.totalBudget * 360;
         updatedComponents[inputIdentifier] = updatedElement;
-        this.setState({components: updatedComponents, selected: (updatedElement[key].value==='void') ? false : true},this.updateArcs())
+        this.setState({components: updatedComponents},this.updateArcs())
 
     }
 
