@@ -12,11 +12,12 @@ const co2DisplaySegment = (props) => {
 
     // onMouseOver={(event) => props.mouseOverHandler(event,props.options.id)}
     // onClick={(event) => props.clickHandler(event,props.options.id)}
+    // console.log(props)
     return (
         <div
             className={classAdd.join(' ')}
             style={{
-                transform: 'rotate('+ props.data.arc_pos + 'deg) skewY(' + (props.data.arc - 90) + 'deg)',
+                transform: 'rotate('+ props.arc_pos + 'deg) skewY(' + (props.arc - 90) + 'deg)',
                 background: (props.data.costType==='planned') ? 'green' : 'red',
             }}
             onClick={(event) => props.clickHandler(event,props.data.id)}>

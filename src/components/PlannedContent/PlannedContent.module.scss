@@ -27,9 +27,24 @@
 }
 
 .PlannedContent {
-    width: 50%;
+    width: 45%;
     border: 1px solid black;
     border-radius: 5px;
     margin: 5px;
     box-shadow: 5px 5px 2px grey;
+}
+
+.Changer {
+    width: 10%;
+    height: auto;
+}
+
+.fas {
+    color: black;
+    background-color: green;
+
+}
+
+.Checked {
+    background-color: rgba(green,0.2)
 }

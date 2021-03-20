@@ -3,7 +3,7 @@ const formData = {
     elementType: 'select',
     elementConfig: {
         options: [
-            {value: 'void', displayValue: 'Bitte auswaehlen'},
+            {value: 'void', displayValue: 'Keine'},
             {value: 'street', displayValue: 'Strassenbau'},
             {value: 'build', displayValue: 'Hausbau'},
             {value: 'industry', displayValue: 'Industrie'},

@@ -13,78 +13,79 @@ import classes from './Calculator.module.scss';
 class Calculator extends Component {
 
     state = {
+        // Feuerwehr, Kita, Schule, Verwaltung, Krankenhäuser, Volkshochschulen, Bauernhöfe, Abfallentsorgung, Energieversorgung
+        // Material: Holz, Beton, Recyclingbeton, Hybrid
+
+        // Bauvorhaben, landwirtschaft mobilitaet
         components: {
             id1: {
                 opt1: {
-                    id: 1,
                     costs: 8,
-                    arc: 6,
-                    arc_pos: null,
                     costType: 'running',
                     label: 'Verkehr',
                     formElement: null,
                     formOptions: null,
-                    selected: false
+                    selected: false,
+                    checked: true
                 },
                 opt2: {
-                    id: 2,
                     costs: 8,
-                    arc: 12,
-                    arc_pos: null,
                     costType: 'running',
                     label: 'Verkehr',
                     formElement: null,
                     formOptions: null,
-                    selected: false
-                }
+                    selected: false,
+                    checked: false
+                },
+                checked: 'opt1',
+                arc: 6,
+                arc_pos: null,
             },
             id2: {
                 opt1: {
-                    id: 1,
-                    costs: 10,
-                    arc: 5,
-                    arc_pos: null,
+                    costs: 20,
                     costType: 'running',
                     label: 'Industrie',
                     formElement: null,
                     formOptions: null,
-                    selected: false
+                    selected: false,
+                    checked: true
                 },
                 opt2: {
-                    id: 2,
                     costs: 10,
-                    arc: 15,
-                    arc_pos: 0,
                     costType: 'running',
                     label: 'Industrie',
                     formElement: null,
                     formOptions: null,
-                    selected: false
+                    selected: false,
+                    checked: false
                 },
+                checked: 'opt1',
+                arc: 5,
+                arc_pos: null,
             },
             id3: {
                 opt1: {
-                    id: 1,
                     costs: 2,
-                    arc: 4,
-                    arc_pos: null,
                     costType: 'running',
                     label: 'Ernaehrung',
                     formElement: null,
                     formOptions: null,
-                    selected: false
+                    selected: false,
+                    checked: true
                 },
                 opt2: {
-                    id: 2,
                     costs: 2,
-                    arc: 8,
-                    arc_pos: null,
                     costType: 'running',
                     label: 'Ernaehrung',
                     formElement: null,
                     formOptions: null,
-                    selected: false
-                }
+                    selected: false,
+                    checked: false
+                },
+                checked: 'opt1',
+                arc: 4,
+                arc_pos: null,
             },
         },
         totalBudget: 100,
@@ -114,7 +115,7 @@ class Calculator extends Component {
         const updatedComponents = this.state.components
         // let cumsum = 0;
         for (const key of Object.keys(updatedComponents)) {
-            updatedComponents[key].opt1.arc = updatedComponents[key].opt1.costs / this.state.totalBudget * 360;
+            updatedComponents[key].arc = updatedComponents[key].opt1.costs / this.state.totalBudget * 360;
             // updatedComponents[key].arc_pos = cumsum;
             // cumsum += updatedComponents[key].arc;
         }
@@ -129,14 +130,15 @@ class Calculator extends Component {
 
     updateArcs = () => {
 
-        const updatedComponents = this.state.components
-        console.log(updatedComponents)
+        const updatedComponents = {...this.state.components}
         let cumsum = 0;
         for (let key of Object.keys(updatedComponents)) {
-            updatedComponents[key].opt1.arc_pos = cumsum;
-            console.log(updatedComponents[key].opt1)
-            cumsum += updatedComponents[key].opt1.arc
-            console.log(cumsum)
+
+            let key2 = updatedComponents[key].checked
+            const arc = updatedComponents[key][key2].costs/this.state.totalBudget * 360.;
+            updatedComponents[key].arc = arc;
+            updatedComponents[key].arc_pos = cumsum;
+            cumsum += updatedComponents[key].arc
         }
         this.setState({components: updatedComponents})
     }
@@ -151,30 +153,39 @@ class Calculator extends Component {
         updatedComponents['id'+id] = {
             opt1: {
                 costs: cost,
-                arc: cost/this.state.totalBudget * 360,
-                arc_pos: 0,
                 costType: 'planned',
                 label: 'neues Projekt',
                 formElement: plannedContentForm,
                 formOptions: categoriesForm,
-                selected: false
+                checked: true,
             },
             opt2: {
                 costs: cost,
-                arc: cost/this.state.totalBudget * 360,
-                arc_pos: 0,
                 costType: 'planned',
                 label: 'neues Projekt',
                 formElement: plannedContentForm,
                 formOptions: categoriesForm,
-                selected: false
+                checked: false,
             },
+            checked: 'opt1',
+            arc: cost/this.state.totalBudget * 360,
+            arc_pos: 0,
         }
         this.setState({components:updatedComponents},this.updateArcs())
     }
 
+    chooseOptionHandler = (event,id1,id2) => {
+        let updatedComponents = {...this.state.components}
+        updatedComponents[id1].checked = id2;
 
-    inputChangedHandler = (event,inputIdentifier) => {
+        this.setState({components:updatedComponents},this.updateArcs())
+    }
+
+    chooseCategoryHandler = () => {
+        let updatedComponents = {...this.state.components}
+    }
+
+    inputChangedHandler = (event,inputIdentifier,key) => {
         console.log(inputIdentifier)
         console.log(this.state.components[inputIdentifier])
 
@@ -183,10 +194,10 @@ class Calculator extends Component {
         let updatedComponents = {...this.state.components}
         let updatedElement = {...updatedComponents[inputIdentifier]};
         console.log(updatedElement)
-        updatedElement.opt1.value = event.target.value;
+        updatedElement[key].value = event.target.value;
 
         let costs = null;
-        switch (updatedElement.opt1.value) {
+        switch (updatedElement[key].value) {
             case 'street':
                 costs = 8;
                 break;
@@ -203,10 +214,10 @@ class Calculator extends Component {
                 costs = null;
         }
 
-        updatedElement.opt1.costs = costs;
-        updatedElement.opt1.arc = costs/this.state.totalBudget * 360;
+        updatedElement[key].costs = costs;
+        updatedElement.arc = costs/this.state.totalBudget * 360;
         updatedComponents[inputIdentifier] = updatedElement;
-        this.setState({components: updatedComponents, selected: (updatedElement.opt1.value==='void') ? false : true},this.updateArcs())
+        this.setState({components: updatedComponents, selected: (updatedElement[key].value==='void') ? false : true},this.updateArcs())
 
     }
 
@@ -220,9 +231,11 @@ class Calculator extends Component {
             if ((this.state.components[key].opt1.costType==='planned')) {
                 return <PlannedContent
                     key={key}
+                    key1={key}
                     id={key}
                     data={this.state.components[key]}
-                    inputHandler={this.inputChangedHandler}/>
+                    inputHandler={this.inputChangedHandler}
+                    chooseOptionHandler={this.chooseOptionHandler}/>
             } else {
                 return null;
             }

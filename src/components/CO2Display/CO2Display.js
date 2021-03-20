@@ -8,17 +8,22 @@ import classes from './CO2Display.module.scss'
 
 const CO2Display = (props) => {
 
-    console.log(props.data)
     let info = null;
     let segments = Object.keys(props.data).map(key => {
-        if (props.data[key].costs!==null) {
+
+        const key2 = props.data[key].checked;
+        console.log(key2)
+
+        if (props.data[key][key2].costs!==null) {
             return <CO2DisplaySegment
                 key={key}
-                data={props.data[key]}
+                data={props.data[key][key2]}
+                arc={props.data[key].arc}
+                arc_pos={props.data[key].arc_pos}
                 mouseOverHandler={props.mouseOverHandler}
                 clickHandler={props.clickHandler}
-                clicked={props.clickedID===props.data[key].id}
-                hovered={props.hoverID===props.data[key].id} />
+                clicked={props.clickedID===key}
+                hovered={props.hoverID===key} />
         } else {
             return null
         }
