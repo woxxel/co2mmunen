@@ -14,7 +14,7 @@ const CO2Display = (props) => {
     //                 openModal={props.openModalHandler}/> : null;
     let segments = props.data.map(comp => {
         if (comp.costs!==null) {
-            console.log(comp);
+            // console.log(comp);
             return <CO2DisplaySegment
                 key={comp.id}
                 data={comp}

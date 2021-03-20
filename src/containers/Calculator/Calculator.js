@@ -16,28 +16,44 @@ class Calculator extends Component {
                 costs: 8,
                 arc: 0,
                 arc_pos: 0,
-                costType: 'running'
+                costType: 'running',
+                label: 'Verkehr',
+                formElement: null,
+                formOptions: null,
+                selected: false
             },
             {
                 id: 2,
                 costs: 10,
                 arc: 0,
                 arc_pos: 0,
-                costType: 'running'
+                costType: 'running',
+                label: 'Industrie',
+                formElement: null,
+                formOptions: null,
+                selected: false
             },
             {
                 id: 3,
                 costs: 2,
                 arc: 0,
                 arc_pos: 0,
-                costType: 'running'
+                costType: 'running',
+                label: 'Ernaehrung',
+                formElement: null,
+                formOptions: null,
+                selected: false
             },
             {
                 id: 4,
                 costs: 18,
                 arc: 0,
                 arc_pos: 0,
-                costType: 'running'
+                costType: 'running',
+                label: 'Lieferketten',
+                formElement: null,
+                formOptions: null,
+                selected: false
             },
         ],
         totalBudget: 100,
@@ -48,6 +64,7 @@ class Calculator extends Component {
     }
 
     openModalHandler = () => {
+        console.log('clicked')
         this.setState({openModal: true})
     }
     closeModalHandler = () => {
@@ -86,14 +103,18 @@ class Calculator extends Component {
             costs: cost,
             arc: cost/this.state.totalBudget * 360,
             arc_pos: lastItem.arc_pos + lastItem.arc,
-            costType: 'planned'
+            costType: 'planned',
+            label: 'neues Projekt'
         })
         this.setState({components:updatedComponents})
     }
 
     render() {
 
-        let modalContent = null;
+        let modalContent = <div>
+                <p>Informationen zu Massnahme XY</p>
+                <p>CO2 Kosten: xxxx</p>
+            </div>;
         let plannedContent = null;
         plannedContent = this.state.components.map(comp => {
             if ((comp.costType==='planned')) {
@@ -106,14 +127,22 @@ class Calculator extends Component {
             }
         })
 
-        // let modalContent = <div>
+        // console.log(this.state)
+        // if (this.state.clickedID) {
+        //     modalContent = <div>
+        //             <p>Some information about the clicked thing</p>
+        //             <p>CO2 Kosten: {this.state.components[this.state.clickedID.costs]}</p>
+        //         </div>
+        // }
+        // modalContent = null;
         //     <h1>Progress on sustainability on SDG {this.state.clickedID}</h1>
         // </div>
 
         let co2Display = null;
         if (this.state.loaded) {
             co2Display = <CO2Display
-                data={this.state.components}/>
+                data={this.state.components}
+                clickHandler={this.openModalHandler}/>
         }
         return (
             <div
@@ -123,6 +152,7 @@ class Calculator extends Component {
                     modalCancelled={this.closeModalHandler}>
                     {modalContent}
                 </Modal>
+                Gesamtes CO2 Budget: {this.state.totalBudget}
                 {co2Display}
                 <div className={classes.AddContent}>
                     <h1>Liste geplanter Massnahmen</h1>
