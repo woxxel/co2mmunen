@@ -9,19 +9,15 @@ import classes from './CO2Display.module.scss'
 const CO2Display = (props) => {
 
     let info = null;
-    // let info = props.clickedID ? <MonitoringInfo
-    //                 id={props.clickedID}
-    //                 openModal={props.openModalHandler}/> : null;
-    let segments = props.data.map(comp => {
-        if (comp.costs!==null) {
-            // console.log(comp);
+    let segments = Object.keys(props.data).map(key => {
+        if (props.data[key].costs!==null) {
             return <CO2DisplaySegment
-                key={comp.id}
-                data={comp}
+                key={key}
+                data={props.data[key]}
                 mouseOverHandler={props.mouseOverHandler}
                 clickHandler={props.clickHandler}
-                clicked={props.clickedID===comp.id}
-                hovered={props.hoverID===comp.id} />
+                clicked={props.clickedID===props.data[key].id}
+                hovered={props.hoverID===props.data[key].id} />
         } else {
             return null
         }

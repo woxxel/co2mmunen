@@ -8,11 +8,10 @@ const co2DisplaySegment = (props) => {
     if (props.clicked) {
         classAdd.push(classes.Clicked)
     }
-    const styleAdd = props.hovered ? '1px dashed black' : null
+    // const styleAdd = props.hovered ? '1px dashed black' : null
 
     // onMouseOver={(event) => props.mouseOverHandler(event,props.options.id)}
     // onClick={(event) => props.clickHandler(event,props.options.id)}
-    // console.log(props.data)
     return (
         <div
             className={classAdd.join(' ')}

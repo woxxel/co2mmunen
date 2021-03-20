@@ -4,17 +4,21 @@
     justify-content: flex-start;
 }
 
+.PlannedContent {
+    width: 90%;
+}
+
 .ExampleItems {
     display: flex;
     flex-direction: row;
     justify-content: flex-start;
-    width: 100%;
+    width: 50%;
     height: 20%;
 }
 
 .ExampleItem {
-    height: 100%;
-    width: auto;
+    height: auto;
+    width: 30%;
     margin: 5px;
     border-radius: 10px;
     box-shadow: 5px 5px 2px #CCC;

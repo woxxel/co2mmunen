@@ -5,13 +5,16 @@ import PlannedContent from '../../components/PlannedContent/PlannedContent';
 import Modal from '../../components/UI/Modal/Modal'
 import Button from '../../components/UI/Button/Button'
 
+import plannedContentForm from '../../components/PlannedContent/PlannedContentForm';
+import categoriesForm from '../../components/PlannedContent/CategoriesForm';
+
 import classes from './Calculator.module.scss';
 
 class Calculator extends Component {
 
     state = {
-        components: [
-            {
+        components: {
+            id1: {
                 id: 1,
                 costs: 8,
                 arc: 0,
@@ -22,7 +25,7 @@ class Calculator extends Component {
                 formOptions: null,
                 selected: false
             },
-            {
+            id2: {
                 id: 2,
                 costs: 10,
                 arc: 0,
@@ -33,7 +36,7 @@ class Calculator extends Component {
                 formOptions: null,
                 selected: false
             },
-            {
+            id3: {
                 id: 3,
                 costs: 2,
                 arc: 0,
@@ -44,7 +47,7 @@ class Calculator extends Component {
                 formOptions: null,
                 selected: false
             },
-            {
+            id4: {
                 id: 4,
                 costs: 18,
                 arc: 0,
@@ -55,7 +58,7 @@ class Calculator extends Component {
                 formOptions: null,
                 selected: false
             },
-        ],
+        },
         totalBudget: 100,
         hoverID: null,
         clickedID: null,
@@ -81,47 +84,102 @@ class Calculator extends Component {
     componentDidMount() {
 
         const updatedComponents = this.state.components
-        let cumsum = 0;
-        for (let i=0;i<updatedComponents.length;i++) {
-            updatedComponents[i].arc = updatedComponents[i].costs / this.state.totalBudget * 360;
-            updatedComponents[i].arc_pos = cumsum;
-            cumsum += updatedComponents[i].arc;
+        // let cumsum = 0;
+        for (const key of Object.keys(updatedComponents)) {
+            updatedComponents[key].arc = updatedComponents[key].costs / this.state.totalBudget * 360;
+            // updatedComponents[key].arc_pos = cumsum;
+            // cumsum += updatedComponents[key].arc;
         }
         this.setState({
             components: updatedComponents,
+            formElement: plannedContentForm,
+            formOptions: categoriesForm,
             loaded: true
         })
+        this.updateArcs()
+    }
+
+    updateArcs = () => {
+        console.log('arcs')
+
+        const updatedComponents = this.state.components
+        let cumsum = 0
+        for (const [key, value] of Object.entries(updatedComponents)) {
+            updatedComponents[key].arc_pos = cumsum;
+            cumsum += value.arc
+        }
+        this.setState({components: updatedComponents})
     }
 
     onClickHandler = () => {
         const updatedComponents = this.state.components
-        const lastItem = updatedComponents[updatedComponents.length-1]
-        const cost = Math.floor(Math.random()*20);
+        // const lastItem = updatedComponents[updatedComponents.length-1]
+        const cost = null;
+        const id = Math.floor(Math.random()*1000);
 
-        updatedComponents.push({
-            id: lastItem.id+1,
+        updatedComponents['id'+id] = {
             costs: cost,
             arc: cost/this.state.totalBudget * 360,
-            arc_pos: lastItem.arc_pos + lastItem.arc,
+            arc_pos: 0,
             costType: 'planned',
-            label: 'neues Projekt'
-        })
-        this.setState({components:updatedComponents})
+            label: 'neues Projekt',
+            formElement: plannedContentForm,
+            formOptions: categoriesForm,
+            selected: false
+        }
+        this.setState({components:updatedComponents},this.updateArcs())
+
+    }
+
+
+    inputChangedHandler = (event,inputIdentifier) => {
+        console.log(inputIdentifier)
+        console.log(this.state.components[inputIdentifier])
+
+        console.log(event.target.value)
+
+        let updatedComponents = {...this.state.components}
+        let updatedElement = {...updatedComponents[inputIdentifier]};
+        updatedElement.value = event.target.value;
+
+        let costs = null;
+        switch (updatedElement.value) {
+            case 'street':
+                costs = 8;
+                break;
+            case 'build':
+                costs = 10;
+                break;
+            case 'industry':
+                costs = 22;
+                break;
+            case 'parc':
+                costs = 12;
+                break;
+            default:
+                costs = null;
+        }
+
+        updatedElement.costs = costs;
+        updatedElement.arc = costs/this.state.totalBudget * 360;
+        updatedComponents[inputIdentifier] = updatedElement;
+        this.setState({components: updatedComponents, selected: (updatedElement.value==='void') ? false : true},this.updateArcs())
+
     }
 
     render() {
-
         let modalContent = <div>
                 <p>Informationen zu Massnahme XY</p>
                 <p>CO2 Kosten: xxxx</p>
             </div>;
         let plannedContent = null;
-        plannedContent = this.state.components.map(comp => {
-            if ((comp.costType==='planned')) {
+        plannedContent = Object.keys(this.state.components).map(key => {
+            if ((this.state.components[key].costType==='planned')) {
                 return <PlannedContent
-                    key={comp.id}
-                    id={comp.id}
-                    data={comp} />
+                    key={key}
+                    id={key}
+                    data={this.state.components[key]}
+                    inputHandler={this.inputChangedHandler}/>
             } else {
                 return null;
             }
