@@ -48,22 +48,25 @@ class plannedContent extends Component {
         let inputCategories = null;
         let examples = null;
         if (this.state.loaded) {
-            input = <Input
-                id={this.props.id}
-                value={this.state.formValue}
-                label={this.state.formElement.label}
+            input = <div>
+                <Input
+                    id={this.props.id}
+                    value={this.state.formValue}
+                    label={this.state.formElement.label}
 
-                elementType={this.state.formElement.elementType}
-                elementConfig={this.state.formElement.elementConfig}
+                    elementType={this.state.formElement.elementType}
+                    elementConfig={this.state.formElement.elementConfig}
 
-                quickAdd={this.state.formElement.quickAdd}
+                    quickAdd={this.state.formElement.quickAdd}
 
-                invalid={!this.state.formElement.valid}
-                shouldValidate={this.state.formElement.validation}
-                touched={this.state.formElement.touched}
+                    invalid={!this.state.formElement.valid}
+                    shouldValidate={this.state.formElement.validation}
+                    touched={this.state.formElement.touched}
 
-                changed={(event) => this.inputChangedHandler(event,this.props.id)}
-                />
+                    changed={(event) => this.inputChangedHandler(event,this.props.id)}
+                    />
+                </div>
+
             if (this.state.selected) {
                 const categories = Object.values(this.state.formOptions).map(opt => {
                     return <Input
@@ -102,8 +105,6 @@ class plannedContent extends Component {
                             src='/assets/images/kita3.jpeg'
                             className={classes.ExampleItem} alt='example' />
                 </div>
-
-
             }
         }
         return (
