@@ -4,10 +4,6 @@
     justify-content: flex-start;
 }
 
-.PlannedContent {
-    width: 90%;
-}
-
 .ExampleItems {
     display: flex;
     flex-direction: row;
@@ -18,9 +14,22 @@
 
 .ExampleItem {
     height: auto;
-    width: 30%;
+    width: 50%;
     margin: 5px;
     border-radius: 10px;
     box-shadow: 5px 5px 2px #CCC;
     cursor: pointer;
+}
+
+.OptionsContainer {
+    display: flex;
+    flex-direction: row;
+}
+
+.PlannedContent {
+    width: 50%;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 5px;
+    box-shadow: 5px 5px 2px grey;
 }

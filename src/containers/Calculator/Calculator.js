@@ -15,48 +15,76 @@ class Calculator extends Component {
     state = {
         components: {
             id1: {
-                id: 1,
-                costs: 8,
-                arc: 0,
-                arc_pos: 0,
-                costType: 'running',
-                label: 'Verkehr',
-                formElement: null,
-                formOptions: null,
-                selected: false
+                opt1: {
+                    id: 1,
+                    costs: 8,
+                    arc: 6,
+                    arc_pos: null,
+                    costType: 'running',
+                    label: 'Verkehr',
+                    formElement: null,
+                    formOptions: null,
+                    selected: false
+                },
+                opt2: {
+                    id: 2,
+                    costs: 8,
+                    arc: 12,
+                    arc_pos: null,
+                    costType: 'running',
+                    label: 'Verkehr',
+                    formElement: null,
+                    formOptions: null,
+                    selected: false
+                }
             },
             id2: {
-                id: 2,
-                costs: 10,
-                arc: 0,
-                arc_pos: 0,
-                costType: 'running',
-                label: 'Industrie',
-                formElement: null,
-                formOptions: null,
-                selected: false
+                opt1: {
+                    id: 1,
+                    costs: 10,
+                    arc: 5,
+                    arc_pos: null,
+                    costType: 'running',
+                    label: 'Industrie',
+                    formElement: null,
+                    formOptions: null,
+                    selected: false
+                },
+                opt2: {
+                    id: 2,
+                    costs: 10,
+                    arc: 15,
+                    arc_pos: 0,
+                    costType: 'running',
+                    label: 'Industrie',
+                    formElement: null,
+                    formOptions: null,
+                    selected: false
+                },
             },
             id3: {
-                id: 3,
-                costs: 2,
-                arc: 0,
-                arc_pos: 0,
-                costType: 'running',
-                label: 'Ernaehrung',
-                formElement: null,
-                formOptions: null,
-                selected: false
-            },
-            id4: {
-                id: 4,
-                costs: 18,
-                arc: 0,
-                arc_pos: 0,
-                costType: 'running',
-                label: 'Lieferketten',
-                formElement: null,
-                formOptions: null,
-                selected: false
+                opt1: {
+                    id: 1,
+                    costs: 2,
+                    arc: 4,
+                    arc_pos: null,
+                    costType: 'running',
+                    label: 'Ernaehrung',
+                    formElement: null,
+                    formOptions: null,
+                    selected: false
+                },
+                opt2: {
+                    id: 2,
+                    costs: 2,
+                    arc: 8,
+                    arc_pos: null,
+                    costType: 'running',
+                    label: 'Ernaehrung',
+                    formElement: null,
+                    formOptions: null,
+                    selected: false
+                }
             },
         },
         totalBudget: 100,
@@ -86,7 +114,7 @@ class Calculator extends Component {
         const updatedComponents = this.state.components
         // let cumsum = 0;
         for (const key of Object.keys(updatedComponents)) {
-            updatedComponents[key].arc = updatedComponents[key].costs / this.state.totalBudget * 360;
+            updatedComponents[key].opt1.arc = updatedComponents[key].opt1.costs / this.state.totalBudget * 360;
             // updatedComponents[key].arc_pos = cumsum;
             // cumsum += updatedComponents[key].arc;
         }
@@ -100,35 +128,49 @@ class Calculator extends Component {
     }
 
     updateArcs = () => {
-        console.log('arcs')
 
         const updatedComponents = this.state.components
-        let cumsum = 0
-        for (const [key, value] of Object.entries(updatedComponents)) {
-            updatedComponents[key].arc_pos = cumsum;
-            cumsum += value.arc
+        console.log(updatedComponents)
+        let cumsum = 0;
+        for (let key of Object.keys(updatedComponents)) {
+            updatedComponents[key].opt1.arc_pos = cumsum;
+            console.log(updatedComponents[key].opt1)
+            cumsum += updatedComponents[key].opt1.arc
+            console.log(cumsum)
         }
         this.setState({components: updatedComponents})
     }
 
     onClickHandler = () => {
+
         const updatedComponents = this.state.components
         // const lastItem = updatedComponents[updatedComponents.length-1]
         const cost = null;
         const id = Math.floor(Math.random()*1000);
 
         updatedComponents['id'+id] = {
-            costs: cost,
-            arc: cost/this.state.totalBudget * 360,
-            arc_pos: 0,
-            costType: 'planned',
-            label: 'neues Projekt',
-            formElement: plannedContentForm,
-            formOptions: categoriesForm,
-            selected: false
+            opt1: {
+                costs: cost,
+                arc: cost/this.state.totalBudget * 360,
+                arc_pos: 0,
+                costType: 'planned',
+                label: 'neues Projekt',
+                formElement: plannedContentForm,
+                formOptions: categoriesForm,
+                selected: false
+            },
+            opt2: {
+                costs: cost,
+                arc: cost/this.state.totalBudget * 360,
+                arc_pos: 0,
+                costType: 'planned',
+                label: 'neues Projekt',
+                formElement: plannedContentForm,
+                formOptions: categoriesForm,
+                selected: false
+            },
         }
         this.setState({components:updatedComponents},this.updateArcs())
-
     }
 
 
@@ -140,10 +182,11 @@ class Calculator extends Component {
 
         let updatedComponents = {...this.state.components}
         let updatedElement = {...updatedComponents[inputIdentifier]};
-        updatedElement.value = event.target.value;
+        console.log(updatedElement)
+        updatedElement.opt1.value = event.target.value;
 
         let costs = null;
-        switch (updatedElement.value) {
+        switch (updatedElement.opt1.value) {
             case 'street':
                 costs = 8;
                 break;
@@ -160,10 +203,10 @@ class Calculator extends Component {
                 costs = null;
         }
 
-        updatedElement.costs = costs;
-        updatedElement.arc = costs/this.state.totalBudget * 360;
+        updatedElement.opt1.costs = costs;
+        updatedElement.opt1.arc = costs/this.state.totalBudget * 360;
         updatedComponents[inputIdentifier] = updatedElement;
-        this.setState({components: updatedComponents, selected: (updatedElement.value==='void') ? false : true},this.updateArcs())
+        this.setState({components: updatedComponents, selected: (updatedElement.opt1.value==='void') ? false : true},this.updateArcs())
 
     }
 
@@ -174,7 +217,7 @@ class Calculator extends Component {
             </div>;
         let plannedContent = null;
         plannedContent = Object.keys(this.state.components).map(key => {
-            if ((this.state.components[key].costType==='planned')) {
+            if ((this.state.components[key].opt1.costType==='planned')) {
                 return <PlannedContent
                     key={key}
                     id={key}
@@ -200,7 +243,7 @@ class Calculator extends Component {
         if (this.state.loaded) {
             co2Display = <CO2Display
                 data={this.state.components}
-                clickHandler={this.openModalHandler}/>
+                clickHandler={this.openModalHandler} />
         }
         return (
             <div
@@ -217,7 +260,7 @@ class Calculator extends Component {
                     {plannedContent}
                     <Button
                         type='add'
-                        clicked={this.onClickHandler}/>
+                        clicked={this.onClickHandler} />
                 </div>
             </div>
         )

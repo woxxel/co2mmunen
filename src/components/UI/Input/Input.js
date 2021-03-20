@@ -26,6 +26,14 @@ const input = (props) => {
                 value={props.value}
                 onChange={props.changed} />;
             break;
+        case ('checkbox'):
+            inputElement = <input
+                type="checkbox"
+                className={inputClasses.join(' ')}
+                {...props.elementConfig}
+                value={props.value}
+                onChange={props.changed} />;
+            break;
         case ( 'select'):
             inputElement = (
                 <select

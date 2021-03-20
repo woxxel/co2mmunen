@@ -8,6 +8,7 @@ import classes from './CO2Display.module.scss'
 
 const CO2Display = (props) => {
 
+    console.log(props.data)
     let info = null;
     let segments = Object.keys(props.data).map(key => {
         if (props.data[key].costs!==null) {
