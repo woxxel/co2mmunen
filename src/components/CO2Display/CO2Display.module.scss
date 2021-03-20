@@ -1,0 +1,25 @@
+
+.Pie {
+  overflow:hidden;
+  position: relative;
+  // margin: 1em auto;
+  border: dashed 2px;
+  // padding: 0;
+  // width: 50%;
+  // height: auto;
+  top: 70px;
+  width: 60%;
+  margin: auto;
+  height: 0;
+  // width: 20em;
+  padding-bottom: 60%;
+  border-radius: 50%;
+}
+
+.ProgressBar {
+    height: 1em;
+    // width: 90%;
+    left: 10px;
+    background-color: green;
+    border-radius: 5px;
+}

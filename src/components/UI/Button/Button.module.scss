@@ -1,0 +1,39 @@
+.Button {
+    outline: none;
+    cursor: pointer;
+    margin: 10px;
+    position: relative;
+
+    width: 2rem;
+    height: 2rem;
+    padding: 0.2rem;
+    background-color: grey;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    transition: color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,0.2), 0 2px 10px 0 rgba(0,0,0,0.1);
+    &:hover {
+        color:black;
+    }
+
+}
+
+.Button i {
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+
+
+}
+
+.Success {
+    color: #5C9210;
+}
+
+.Danger {
+    color: #944317;
+}
