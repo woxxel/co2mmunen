@@ -8,6 +8,10 @@
     padding: 0 20px;
     box-sizing: border-box;
     z-index: 90;
+
+    & nav {
+        height: 100%;
+    }
 }
 
 .ToolbarContent {
@@ -19,10 +23,6 @@
     max-width: 800px;
     display: flex;
     justify-content: space-between;
-}
-
-.Toolbar nav {
-    height: 100%;
 }
 
 .Logo {
