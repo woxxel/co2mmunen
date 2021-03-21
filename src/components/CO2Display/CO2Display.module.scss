@@ -21,3 +21,27 @@
     background-color: #2B5C22;
     border-radius: 5px;
 }
+
+.Legend {
+    display: flex;
+    align-items: baseline;
+    flex-direction: row;
+    justify-content: flex-start;
+    width:100%;
+    // padding: 10px;
+}
+
+.LegendNoise, .LegendProjects {
+    // display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-right: 5px;
+
+}
+.LegendNoise {
+    display: inline-block;
+    background-color: grey;
+}
+.LegendProjects {
+    background-color: #2B5C22;
+}

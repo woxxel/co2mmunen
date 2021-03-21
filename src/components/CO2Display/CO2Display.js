@@ -29,9 +29,19 @@ const CO2Display = (props) => {
     })
 
     return (
-        <div
-            className={classes.Pie}>
-            {segments}
+        <div >
+            <div
+                className={classes.Pie}>
+                {segments}
+            </div>
+            <div style={{display: 'block'}}>
+                <div className={classes.Legend}>
+                    <div className={classes.LegendNoise}></div><p>laufende CO2 Emissionen</p>
+                </div>
+                <div className={classes.Legend}>
+                    <div className={classes.LegendProjects}></div><p>CO2 Emissionen durch geplante Projekte</p>
+                </div>
+            </div>
         </div>
     )
 }
