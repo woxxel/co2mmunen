@@ -13,14 +13,14 @@ import reportWebVitals from './reportWebVitals';
 import planningReducer from './store/reducers/planning';
 import uiReducer from './store/reducers/ui';
 
-const composeEnhancers = `${process.env.REACT_APP_BACKEND_URL}/login` ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null || compose;
+const composeEnhancers = (process.env.NODE_ENV === 'development' ? window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ : null) || compose;
 
 const rootReducer = combineReducers({
     planning: planningReducer,
     ui: uiReducer
 });
 
-const store = createStore(rootReducer,composeEnhancers(
+const store = createStore(rootReducer, composeEnhancers(
     applyMiddleware(thunk)
 ));
 
