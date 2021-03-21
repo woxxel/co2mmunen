@@ -3,7 +3,6 @@ import React, { Component } from 'react';
 import CO2Display from '../../components/CO2Display/CO2Display';
 import PlannedContent from '../../components/PlannedContent/PlannedContent';
 import Modal from '../../components/UI/Modal/Modal'
-import Button from '../../components/UI/Button/Button'
 
 import { connect } from 'react-redux';
 import * as actions from '../../store/actions';

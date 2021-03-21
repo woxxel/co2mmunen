@@ -1,5 +1,10 @@
 import React from 'react';
 
+// import { createPopper } from '@popperjs/core';
+// const popcorn = document.querySelector('#popcorn');
+// const tooltip = document.querySelector('#tooltip');
+// createPopper(popcorn, tooltip);
+
 import classes from './CO2DisplaySegment.module.scss'
 
 const co2DisplaySegment = (props) => {

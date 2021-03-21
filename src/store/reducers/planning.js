@@ -7,7 +7,7 @@ import categoriesForm from '../../components/PlannedContent/CategoriesForm';
 
 import {building, traffic} from '../../components/PlannedContent/PlannedContentItem/ProjectTypes';
 import * as categories from '../../components/PlannedContent/PlannedContentItem/Categories';
-import categoryForm from '../../components/PlannedContent/CategoriesForm';
+// import categoryForm from '../../components/PlannedContent/CategoriesForm';
 
 const initialState = {
     // Feuerwehr, Bauernhöfe, Abfallentsorgung, Energieversorgung, Supermarkt, Kirchen, Sportplaetze
@@ -110,8 +110,6 @@ export const selectProject = (state, action) => {
 
     const updatedForm = updateObject(state.projects[action.id][action.option].formProject, {value: action.target.value});
 
-    let costs = null;
-
     const updatedOption = updateObject(state.projects[action.id][action.option],{
         formProject: updatedForm,
         costs: null
@@ -176,6 +174,9 @@ export const updateCosts = (state, action) => {
                         break;
                     case 'linear':
                         costs += state.projects[id][option].formOptions[key].value * categories[key].costs
+                        break;
+                    default:
+                        costs = 0;
                 }
             })
         } else {
@@ -210,8 +211,10 @@ export const addProject = (state, action) => {
         case 'traffic':
             formEntries = traffic;
             break;
+        default:
+            formEntries = null;
     }
-    const name = formEntries.name;
+    // const name = formEntries.name;
     const categories = formEntries.categories;
 
     newForm.elementConfig.options = [];
@@ -241,6 +244,8 @@ export const addProject = (state, action) => {
             case 'linear':
                 catForms[cat].elementType='input'
                 catForms[cat].value=categories[cat].default
+                break;
+            default:
                 break;
         }
     })
