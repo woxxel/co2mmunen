@@ -74,6 +74,7 @@ class Calculator extends Component {
                     {modalContent}
                 </Modal>
 
+                <p><em>Diese Anwendung ist derzeit in der Entwicklungsphase und wird zunaechst durch keinerlei wissenschaftliche Daten gespeist. Sie haben Interesse an unserer Arbeit? Kontaktieren Sie uns: <a href='mailto::info@co2mmunen.de'>info@co2mmunen.de</a></em></p>
                 <div className={classes.Header}>
                     <div
                         style={{
