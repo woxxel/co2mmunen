@@ -2,17 +2,15 @@
 .Pie {
   overflow:hidden;
   position: relative;
-  // margin: 1em auto;
   border: dashed 2px;
-  // padding: 0;
-  // width: 50%;
-  // height: auto;
-  top: 70px;
-  width: 40%;
-  margin: auto;
-  height: 0;
+  height: 15em;
+  width: 15em;
+  // top: 70px;
+  // width: 40%;
+  margin: auto 2em;
+  // height: 0;
   // width: 20em;
-  padding-bottom: 40%;
+  // padding-bottom: 40%;
   border-radius: 50%;
 }
 
@@ -20,6 +18,6 @@
     height: 1em;
     // width: 90%;
     left: 10px;
-    background-color: green;
+    background-color: #2B5C22;
     border-radius: 5px;
 }

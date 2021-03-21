@@ -3,6 +3,8 @@ import React, {Component} from 'react';
 import classes from './Modal.module.scss';
 import Aux from '../../../hoc/Aux/Aux';
 import Backdrop from '../Backdrop/Backdrop';
+import { connect } from 'react-redux';
+import * as actions from '../../../store/actions';
 
 class Modal extends Component {
 
@@ -19,11 +21,24 @@ class Modal extends Component {
         )
         return (
             <Aux>
-                <Backdrop show={this.props.show} clicked={this.props.modalCancelled} />
+                <Backdrop show={this.props.show} clicked={() => this.props.closeModal()} />
                 {this.props.show ? modal : null}
             </Aux>
         )
     }
 };
 
-export default Modal;
+const mapStateToProps = state => {
+    return {
+        show: state.ui.openModal
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        openModal: () => dispatch(actions.open_modal()),
+        closeModal: () => dispatch(actions.close_modal())
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Modal);

@@ -1,50 +1,13 @@
-.SelectCategories {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-}
 
-.ExampleItems {
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    width: 50%;
-    height: 20%;
-}
-
-.ExampleItem {
-    height: auto;
-    width: 50%;
-    margin: 5px;
-    border-radius: 10px;
-    box-shadow: 5px 5px 2px #CCC;
-    cursor: pointer;
-}
 
 .OptionsContainer {
     display: flex;
     flex-direction: row;
 }
 
-.PlannedContent {
-    width: 45%;
-    border: 1px solid black;
-    border-radius: 5px;
-    margin: 5px;
-    box-shadow: 5px 5px 2px grey;
-}
 
-.Changer {
-    width: 10%;
-    height: auto;
-}
 
 .fas {
     color: black;
     background-color: green;
-
-}
-
-.Checked {
-    background-color: rgba(green,0.2)
 }

@@ -11,9 +11,8 @@ const formData = {
         ]
     },
     value: 'void',
-    label: 'Art der Massnahme',
+    label: 'Projektvorhaben',
     validation: {},
-    quickAdd: true,
     valid: true,
     touched: false
 }

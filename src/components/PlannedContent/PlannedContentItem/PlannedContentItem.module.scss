@@ -1,0 +1,58 @@
+.SelectCategories {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+}
+
+.ReferenceItems {
+    position: relative;
+    width: 100%;
+    height: 200px;
+}
+
+.ExampleItems {
+    // position: relative;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    width: 100%;
+    height: auto;
+    padding: 10px;
+}
+
+.ExampleItem {
+    // position: relative;
+    // height: auto;
+    width: 25%;
+    height: 200px;
+    margin: 5px;
+    // overflow: hidden;
+    cursor: pointer;
+
+    & img {
+        box-shadow: 5px 5px 2px #CCC;
+        width: 100%;
+        height: 20%;
+        border-radius: 5px;
+    }
+}
+
+.PlannedContent {
+    position: relative;
+    width: 45%;
+    border: 1px solid black;
+    border-radius: 5px;
+    margin: 5px;
+    box-shadow: 5px 5px 2px grey;
+    margin-bottom: 50px;
+}
+
+.Changer {
+    position: absolute;
+    color: green;
+    top: 5px;
+    right:5px;
+    cursor: pointer;
+
+}

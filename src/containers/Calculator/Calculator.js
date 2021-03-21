@@ -5,96 +5,17 @@ import PlannedContent from '../../components/PlannedContent/PlannedContent';
 import Modal from '../../components/UI/Modal/Modal'
 import Button from '../../components/UI/Button/Button'
 
-import plannedContentForm from '../../components/PlannedContent/PlannedContentForm';
-import categoriesForm from '../../components/PlannedContent/CategoriesForm';
-
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions';
 import classes from './Calculator.module.scss';
 
 class Calculator extends Component {
 
     state = {
-        // Feuerwehr, Kita, Schule, Verwaltung, Krankenhäuser, Volkshochschulen, Bauernhöfe, Abfallentsorgung, Energieversorgung
-        // Material: Holz, Beton, Recyclingbeton, Hybrid
-
-        // Bauvorhaben, landwirtschaft mobilitaet
-        components: {
-            id1: {
-                opt1: {
-                    costs: 8,
-                    costType: 'running',
-                    label: 'Verkehr',
-                    formElement: null,
-                    formOptions: null,
-                    selected: false,
-                },
-                opt2: {
-                    costs: 8,
-                    costType: 'running',
-                    label: 'Verkehr',
-                    formElement: null,
-                    formOptions: null,
-                    selected: false,
-                },
-                checked: 'opt1',
-                arc: 6,
-                arc_pos: null,
-            },
-            id2: {
-                opt1: {
-                    costs: 20,
-                    costType: 'running',
-                    label: 'Industrie',
-                    formElement: null,
-                    formOptions: null,
-                    selected: false,
-                },
-                opt2: {
-                    costs: 10,
-                    costType: 'running',
-                    label: 'Industrie',
-                    formElement: null,
-                    formOptions: null,
-                    selected: false,
-                },
-                checked: 'opt1',
-                arc: 5,
-                arc_pos: null,
-            },
-            id3: {
-                opt1: {
-                    costs: 2,
-                    costType: 'running',
-                    label: 'Ernaehrung',
-                    formElement: null,
-                    formOptions: null,
-                    selected: false,
-                },
-                opt2: {
-                    costs: 2,
-                    costType: 'running',
-                    label: 'Ernaehrung',
-                    formElement: null,
-                    formOptions: null,
-                    selected: false,
-                },
-                checked: 'opt1',
-                arc: 4,
-                arc_pos: null,
-            },
-        },
-        totalBudget: 100,
         hoverID: null,
         clickedID: null,
         loaded: false,
         openModal: false
-    }
-
-    openModalHandler = () => {
-        console.log('clicked')
-        this.setState({openModal: true})
-    }
-    closeModalHandler = () => {
-        this.setState({openModal: false})
     }
 
     mouseOverHandler = (event,id) => {
@@ -105,113 +26,11 @@ class Calculator extends Component {
     }
 
     componentDidMount() {
-
-        const updatedComponents = this.state.components
-        // let cumsum = 0;
-        for (const key of Object.keys(updatedComponents)) {
-            updatedComponents[key].arc = updatedComponents[key].opt1.costs / this.state.totalBudget * 360;
-            // updatedComponents[key].arc_pos = cumsum;
-            // cumsum += updatedComponents[key].arc;
-        }
-        this.setState({
-            components: updatedComponents,
-            formElement: plannedContentForm,
-            formOptions: categoriesForm,
-            loaded: true
-        })
-        this.updateArcs()
+        // this.props.loaded = true;
+        this.props.updateCosts()
+        this.setState({loaded: true})
     }
 
-    updateArcs = () => {
-
-        const updatedComponents = {...this.state.components}
-        let cumsum = 0;
-        for (let key of Object.keys(updatedComponents)) {
-
-            let key2 = updatedComponents[key].checked
-            const arc = updatedComponents[key][key2].costs/this.state.totalBudget * 360.;
-            updatedComponents[key].arc = arc;
-            updatedComponents[key].arc_pos = cumsum;
-            cumsum += updatedComponents[key].arc
-        }
-        this.setState({components: updatedComponents})
-    }
-
-    onClickHandler = () => {
-
-        const updatedComponents = this.state.components
-        // const lastItem = updatedComponents[updatedComponents.length-1]
-        const cost = null;
-        const id = Math.floor(Math.random()*1000);
-
-        updatedComponents['id'+id] = {
-            opt1: {
-                costs: cost,
-                costType: 'planned',
-                label: 'neues Projekt',
-                formElement: plannedContentForm,
-                formOptions: categoriesForm,
-            },
-            opt2: {
-                costs: cost,
-                costType: 'planned',
-                label: 'neues Projekt',
-                formElement: plannedContentForm,
-                formOptions: categoriesForm,
-            },
-            checked: 'opt1',
-            arc: cost/this.state.totalBudget * 360,
-            arc_pos: 0,
-        }
-        this.setState({components:updatedComponents},this.updateArcs())
-    }
-
-    chooseOptionHandler = (event,id1,id2) => {
-        let updatedComponents = {...this.state.components}
-        updatedComponents[id1].checked = id2;
-
-        this.setState({components:updatedComponents},this.updateArcs())
-    }
-
-    chooseCategoryHandler = () => {
-        let updatedComponents = {...this.state.components}
-    }
-
-    inputChangedHandler = (event,inputIdentifier,key) => {
-        console.log(inputIdentifier)
-        console.log(this.state.components[inputIdentifier])
-
-        console.log(event.target.value)
-
-        let updatedComponents = {...this.state.components}
-        let updatedElement = {...updatedComponents[inputIdentifier]};
-        console.log(updatedElement)
-        updatedElement[key].value = event.target.value;
-
-        let costs = null;
-        switch (updatedElement[key].value) {
-            case 'street':
-                costs = 8;
-                break;
-            case 'build':
-                costs = 10;
-                break;
-            case 'industry':
-                costs = 22;
-                break;
-            case 'parc':
-                costs = 12;
-                break;
-            default:
-                costs = null;
-        }
-
-        updatedElement[key].costs = costs;
-        updatedElement.arc = costs/this.state.totalBudget * 360;
-        updatedComponents[inputIdentifier] = updatedElement;
-        this.setState({components: updatedComponents},this.updateArcs())
-
-    }
 
     render() {
         let modalContent = <div>
@@ -219,15 +38,12 @@ class Calculator extends Component {
                 <p>CO2 Kosten: xxxx</p>
             </div>;
         let plannedContent = null;
-        plannedContent = Object.keys(this.state.components).map(key => {
-            if ((this.state.components[key].opt1.costType==='planned')) {
+        plannedContent = Object.keys(this.props.proj).map(id => {
+            if ((this.props.proj[id].costType==='planned')) {
                 return <PlannedContent
-                    key={key}
-                    key1={key}
-                    id={key}
-                    data={this.state.components[key]}
-                    inputHandler={this.inputChangedHandler}
-                    chooseOptionHandler={this.chooseOptionHandler}/>
+                    key={id}
+                    id={id}
+                    inputHandler={this.inputChangedHandler} />
             } else {
                 return null;
             }
@@ -258,18 +74,57 @@ class Calculator extends Component {
                     modalCancelled={this.closeModalHandler}>
                     {modalContent}
                 </Modal>
-                Gesamtes CO2 Budget: {this.state.totalBudget}
-                {co2Display}
+
+                <div className={classes.Header}>
+                    <div
+                        style={{
+                            width: '60%',
+                            padding: 'auto',
+                            paddingLeft: '0'
+                        }}>
+                        <h1>Steuerungstool fuer Klima-bewusste Gemeinden</h1>
+                    </div>
+                    <div
+                        style={{
+                            margin: 'auto 0'
+                        }}>
+                        <img src='/assets/images/TengenLogo.png' alt='city Logo'/>
+                    </div>
+                </div>
+                <div className={classes.Overview}>
+                    {co2Display}
+                    <div className={classes.TextSummary}>
+                        <p>Gesamtes CO2 Budget fuer 2022: {this.props.budget}</p>
+                        <p>Bereits genutztes CO2-Budget: {this.props.currentBudget}</p>
+                        <p>Noch verfuegbares CO2-Budget: {this.props.budget-this.props.currentBudget}</p>
+                        <button
+                            className={classes.BtnAddProject}
+                            onClick={this.props.addProject}>Projekt hinzufuegen</button>
+                    </div>
+                </div>
                 <div className={classes.AddContent}>
-                    <h1>Liste geplanter Massnahmen</h1>
+                    <h1>Projektplanung</h1>
                     {plannedContent}
-                    <Button
-                        type='add'
-                        clicked={this.onClickHandler} />
                 </div>
             </div>
         )
     }
 }
 
-export default Calculator;
+const mapStateToProps = state => {
+    return {
+        loaded: state.loaded,
+        proj: state.planning.projects,
+        budget: state.planning.totalBudget,
+        currentBudget: state.planning.currentBudget
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        updateCosts: () => dispatch(actions.update_costs()),
+        addProject: () => dispatch(actions.add_project())
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(Calculator);

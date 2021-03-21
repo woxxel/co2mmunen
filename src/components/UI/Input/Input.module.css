@@ -1,5 +1,5 @@
 .Input {
-    width: 100%;
+    width: 40%;
     padding : 10px;
     box-sizing: border-box;
 }
@@ -17,7 +17,7 @@
     font: inherit;
     padding: 6px 10px;
     display: block;
-    width: 100%;
+    width: 30%;
     box-sizing: border-box;
 }
 
@@ -29,4 +29,8 @@
 .Invalid {
     border: 1px solid red;
     background-color: #FDA49A;
+}
+
+.TextShort {
+    width: 50px;
 }

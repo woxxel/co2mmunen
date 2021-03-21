@@ -13,6 +13,7 @@ const input = (props) => {
 
     switch ( props.elementType ) {
         case ( 'input'):
+            inputClasses.push(classes.TextShort)
             inputElement = <input
                 className={inputClasses.join(' ')}
                 {...props.elementConfig}
@@ -20,6 +21,7 @@ const input = (props) => {
                 onChange={props.changed} />;
             break;
         case ( 'textarea'):
+
             inputElement = <textarea
                 className={inputClasses.join(' ')}
                 {...props.elementConfig}

@@ -3,41 +3,49 @@ import React from 'react';
 import CO2DisplaySegment from './CO2DisplaySegment/CO2DisplaySegment';
 // import MonitoringInfo from './MonitoringInfo/MonitoringInfo';
 
+import { connect } from 'react-redux';
+import * as actions from '../../store/actions';
 import classes from './CO2Display.module.scss'
 
 
 const CO2Display = (props) => {
 
-    let info = null;
-    let segments = Object.keys(props.data).map(key => {
+    // let info = null;
+    let segments = Object.keys(props.proj).map(id => {
 
-        const key2 = props.data[key].checked;
-        console.log(key2)
+        const option = props.proj[id].checked;
 
-        if (props.data[key][key2].costs!==null) {
+        if (props.proj[id][option].costs!==null) {
             return <CO2DisplaySegment
-                key={key}
-                data={props.data[key][key2]}
-                arc={props.data[key].arc}
-                arc_pos={props.data[key].arc_pos}
+                key={id}
+                data={props.proj[id]}
                 mouseOverHandler={props.mouseOverHandler}
                 clickHandler={props.clickHandler}
-                clicked={props.clickedID===key}
-                hovered={props.hoverID===key} />
+                clicked={props.clickedID===id}
+                hovered={props.hoverID===id} />
         } else {
             return null
         }
     })
 
     return (
-        <div>
-            <div
-                className={classes.Pie}>
-                {segments}
-            </div>
-            {info}
+        <div
+            className={classes.Pie}>
+            {segments}
         </div>
     )
 }
 
-export default CO2Display;
+const mapStateToProps = state => {
+    return {
+        proj: state.planning.projects
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+    return {
+        inOptionSelected: (id,option) => dispatch(actions.select_option)
+    }
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(CO2Display);
