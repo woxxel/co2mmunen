@@ -34,7 +34,7 @@ const CO2Display = (props) => {
                 className={classes.Pie}>
                 {segments}
             </div>
-            <div style={{display: 'block'}}>
+            <div style={{display: 'block', margin: '1rem'}}>
                 <div className={classes.Legend}>
                     <div className={classes.LegendNoise}></div><p>laufende CO2 Emissionen</p>
                 </div>

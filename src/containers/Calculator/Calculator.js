@@ -76,14 +76,11 @@ class Calculator extends Component {
 
                 <p><em>Diese Anwendung ist derzeit in der Entwicklungsphase und wird zunaechst durch keinerlei wissenschaftliche Daten gespeist. Sie haben Interesse an unserer Arbeit? Kontaktieren Sie uns: <a href='mailto::info@co2mmunen.de'>info@co2mmunen.de</a></em></p>
                 <div className={classes.Header}>
-                    <div
-                        style={{
+                        <h1 style={{
                             width: '60%',
                             padding: 'auto',
                             paddingLeft: '0'
-                        }}>
-                        <h1>Steuerungstool fuer Klima-bewusste Gemeinden</h1>
-                    </div>
+                        }}>Steuerungstool fuer Klima-bewusste Gemeinden</h1>
                     <div
                         style={{
                             margin: 'auto 0'
@@ -95,13 +92,13 @@ class Calculator extends Component {
                     <div className={classes.OverviewContent}>
                     {co2Display}
                     <div className={classes.TextSummary}>
-                        <p>Gesamtes CO2 Budget fuer 2022: {this.props.budget}</p>
-                        <p>Bereits genutztes CO2-Budget: {this.props.currentBudget}</p>
-                        <p>Noch verfuegbares CO2-Budget: {this.props.budget-this.props.currentBudget}</p>
-                        <button
-                            className={classes.BtnAddProject}
-                            onClick={this.props.addProject}>Projekt hinzufuegen</button>
+                        <p>Gesamtes CO2 Budget fuer 2022: {this.props.budget} kT</p>
+                        <p>Bereits genutztes CO2-Budget: {this.props.currentBudget} kT</p>
+                        <p>Noch verfuegbares CO2-Budget: {this.props.budget-this.props.currentBudget} kT</p>
                     </div>
+                    <button
+                    className={classes.BtnAddProject}
+                    onClick={this.props.addProject}>Projekt hinzufuegen</button>
                     </div>
                 </div>
                 <div className={classes.AddContent}>
