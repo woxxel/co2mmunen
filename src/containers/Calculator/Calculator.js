@@ -92,6 +92,7 @@ class Calculator extends Component {
                     </div>
                 </div>
                 <div className={classes.Overview}>
+                    <div className={classes.OverviewContent}>
                     {co2Display}
                     <div className={classes.TextSummary}>
                         <p>Gesamtes CO2 Budget fuer 2022: {this.props.budget}</p>
@@ -100,6 +101,7 @@ class Calculator extends Component {
                         <button
                             className={classes.BtnAddProject}
                             onClick={this.props.addProject}>Projekt hinzufuegen</button>
+                    </div>
                     </div>
                 </div>
                 <div className={classes.AddContent}>

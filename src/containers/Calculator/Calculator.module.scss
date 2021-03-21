@@ -1,22 +1,31 @@
 .Calculator {
     width: 100%;
-    max-width: 800px;
+    // max-width: 800px;
     margin: auto;
 }
 
 .AddContent {
     position: relative;
     top: 80px;
+    max-width: 800px;
+    margin: auto;
     // height: 40%;
     // overflow: scroll;
 }
 
 .Overview {
     background-color: #DEF3D9;
-    position: relative;
+    // flex-direction: row;
+    height: 360px;
+    width: 100%;
+    padding: 1rem;
+}
+.OverviewContent {
     display: flex;
     flex-direction: row;
-    height: 360px;
+    // height: 200px;
+    max-width: 800px;
+    margin: auto;
 }
 
 .TextSummary {
@@ -39,4 +48,7 @@
     display: flex;
     flex-direction: row;
     height: 200px;
+    max-width: 800px;
+    margin: auto;
+    padding: 0 2rem;
 }
