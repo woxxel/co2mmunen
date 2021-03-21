@@ -111,31 +111,15 @@ export const selectProject = (state, action) => {
     const updatedForm = updateObject(state.projects[action.id][action.option].formProject, {value: action.target.value});
 
     let costs = null;
-    switch (action.target.value) {
-        case 'street':
-            costs = 8;
-            break;
-        case 'build':
-            costs = 10;
-            break;
-        case 'industry':
-            costs = 22;
-            break;
-        case 'parc':
-            costs = 12;
-            break;
-        default:
-            costs = null;
-    }
 
     const updatedOption = updateObject(state.projects[action.id][action.option],{
         formProject: updatedForm,
-        costs: costs
+        costs: null
     })
 
     const updatedProject = updateObject(state.projects[action.id],{
         [action.option]: updatedOption,
-        arc: costs/state.totalBudget * 360
+        arc: null
     })
 
     const updatedProjects = updateObject(state.projects,{[action.id]: updatedProject})
@@ -171,9 +155,7 @@ export const updateCosts = (state, action) => {
     for (let id of Object.keys(updatedProjects)) {
 
         let option = updatedProjects[id].checked
-        if (!option) {
-            continue;
-        }
+
         updatedProjects[id] = {...state.projects[id]}
         updatedProjects[id][option] = {...state.projects[id][option]}
 
@@ -181,6 +163,9 @@ export const updateCosts = (state, action) => {
 
         if (updatedProjects[id].costType==='planned') {
             const project = state.projects[id][option].formProject.value
+            if (project==='void') {
+                continue
+            }
             costs += building.options[project].costs;
 
             Object.keys(state.projects[id][option].formOptions).map(key => {
@@ -204,7 +189,7 @@ export const updateCosts = (state, action) => {
         updatedProjects[id].arc_pos = cumsum/state.totalBudget * 360.;
         cumsum += costs
     }
-    console.log(updatedProjects)
+
     return updateObject(state,{
         projects: updatedProjects,
         currentBudget: cumsum

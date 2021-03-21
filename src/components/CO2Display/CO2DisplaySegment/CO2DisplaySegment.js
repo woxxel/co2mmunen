@@ -18,10 +18,10 @@ const co2DisplaySegment = (props) => {
             style={{
                 transform: 'rotate('+ props.data.arc_pos + 'deg) skewY(' + (props.data.arc - 90) + 'deg)',
                 background: (props.data.costType==='planned') ? '#2B5C22' : 'grey',
-            }}
-            onClick={(event) => props.clickHandler(event,props.data.id)}>
+            }}>
         </div>
     )
 };
 
+// onClick={(event) => props.clickHandler(event,props.data.id)}>
 export default co2DisplaySegment;

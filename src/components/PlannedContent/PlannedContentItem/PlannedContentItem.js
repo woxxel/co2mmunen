@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 
 
 import Input from '../../UI/Input/Input'
+import ExampleProject from './ExampleProject';
 
 import { connect } from 'react-redux';
 import * as actions from '../../../store/actions';
@@ -33,6 +34,7 @@ class PlannedContentItem extends Component {
                 changed={(event) => this.props.onProjectSelected(event,this.props.id, this.props.option)}
                 />
         </div>
+
         if (proj.formProject.value!=='void') {
             const categories = Object.values(proj.formOptions).map(opt => {
                 return <Input
@@ -51,9 +53,11 @@ class PlannedContentItem extends Component {
                 changed={(event) => this.props.onCategoryChanged(event,this.props.id,this.props.option,opt.key)}
                 />
             })
+
             let modalContent = null;
-            // modalContent = <div>
-                // <h1>Kinder
+            modalContent = <ExampleProject />
+                // <h1>Kindertagesstaette</h1>
+                // <img>
 
             inputCategories = <div
                 className={classes.SelectCategories}>
@@ -68,7 +72,7 @@ class PlannedContentItem extends Component {
                             <img
                                 src='/assets/images/kita1.jpeg'
                                 alt='example'
-                                onClick={() => this.props.openModal()} />
+                                onClick={() => this.props.openModal(modalContent)} />
                             <div>
                                 <button>Als Referenz</button>
                                 <p>CO2: {Math.floor(Math.random()*30)}kT</p>
@@ -79,7 +83,7 @@ class PlannedContentItem extends Component {
                             <img
                                 src='/assets/images/kita2.jpeg'
                                 alt='example'
-                                onClick={() => this.props.openModal()} />
+                                onClick={() => this.props.openModal(modalContent)} />
                             <div>
                                 <button>Als Referenz</button>
                                 <p>CO2: {Math.floor(Math.random()*30)}kT</p>
@@ -90,7 +94,7 @@ class PlannedContentItem extends Component {
                             <img
                                 src='/assets/images/kita3.jpeg'
                                 alt='example'
-                                onClick={() => this.props.openModal()}/>
+                                onClick={() => this.props.openModal(modalContent)}/>
                             <div>
                                 <button>Als Referenz</button>
                                 <p>CO2: {Math.floor(Math.random()*30)}kT</p>
@@ -101,7 +105,8 @@ class PlannedContentItem extends Component {
         }
 
         let classAdd = [classes.PlannedContent]
-        let symbol = <i className="far fa-times-circle fa-3x" style={{color:'red'}}></i>
+        let symbol = <i className="far fa-times-circle fa-3x" style={{color:'red'}} ></i>
+
         if (this.props.proj[this.props.id].checked===this.props.option) {
             classAdd.push(classes.Checked)
             symbol = <i className="far fa-check-circle fa-3x" style={{color:'green'}}></i>
@@ -135,8 +140,8 @@ const mapDispatchToProps = dispatch => {
         onOptionSelected: (id,option) => dispatch(actions.select_option(id,option)),
         onProjectSelected: (event,id,option) => dispatch(actions.select_project(event,id,option)),
         onCategoryChanged: (event,id,option,type) => dispatch(actions.change_category(event,id,option,type)),
-        openModal: () => dispatch(actions.open_modal()),
-        closeModal: () => dispatch(actions.close_modal())
+        openModal: (modalContent) => dispatch(actions.open_modal(modalContent)),
+        closeModal: (modalContent) => dispatch(actions.close_modal(modalContent))
     }
 }
 
