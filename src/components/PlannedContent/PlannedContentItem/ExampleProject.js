@@ -6,7 +6,7 @@ const exampleProject = (props) => {
 
     return(
         <div>
-            <h1>Kindertagesstaette</h1>
+            <h1>Kindertagesstätte</h1>
             <img src='/assets/images/kita4.jpg' alt='Beispiel'/>
             <p>Hier kommt ein bischen content</p>
         </div>

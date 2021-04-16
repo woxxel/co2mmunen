@@ -79,14 +79,14 @@ const initialState = {
         id3: {
             opt1: {
                 costs: 2,
-                label: 'Ernaehrung',
+                label: 'Ernährung',
                 formProject: null,
                 formOptions: null,
                 selected: false,
             },
             opt2: {
                 costs: 2,
-                label: 'Ernaehrung',
+                label: 'Ernährung',
                 formProject: null,
                 formOptions: null,
                 selected: false,

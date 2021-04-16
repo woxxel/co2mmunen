@@ -13,7 +13,7 @@ export const material = {
 }
 
 export const area = {
-    name: 'Grundflaeche',
+    name: 'Grundfläche',
     type: 'linear',
     unit: 'm2',
     costs: 0.02,
@@ -44,7 +44,7 @@ export const energyEfficiency = {
 }
 
 export const length = {
-    name: 'Laenge',
+    name: 'Länge',
     type: 'linear',
     units: 'm',
     costs: '0.01',

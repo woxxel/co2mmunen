@@ -12,7 +12,7 @@ export const building = {
         fire: {name: 'Feuerwehr', costs: 1},
         police: {name: 'Polizei', costs: 1},
         supermarket: {name: 'Supermarkt', costs: 0.5},
-        office: {name: 'Buerogebaeude', costs: 1},
+        office: {name: 'Bürogebaeude', costs: 1},
     },
     categories: {
         material, area, levels, energyEfficiency

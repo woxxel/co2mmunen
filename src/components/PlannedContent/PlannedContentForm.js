@@ -7,7 +7,7 @@ const formData = {
             {value: 'street', displayValue: 'Strassenbau'},
             {value: 'build', displayValue: 'Hausbau'},
             {value: 'industry', displayValue: 'Industrie'},
-            {value: 'parc', displayValue: 'Oeffentliche Flaeche'},
+            {value: 'parc', displayValue: 'Öffentliche Fläche'},
         ]
     },
     value: 'void',

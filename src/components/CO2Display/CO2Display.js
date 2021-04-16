@@ -36,10 +36,10 @@ const CO2Display = (props) => {
             </div>
             <div style={{display: 'block', margin: '1rem'}}>
                 <div className={classes.Legend}>
-                    <div className={classes.LegendNoise}></div><p>laufende CO2 Emissionen</p>
+                    <div className={classes.LegendNoise}></div><p>laufende CO2-Emissionen</p>
                 </div>
                 <div className={classes.Legend}>
-                    <div className={classes.LegendProjects}></div><p>CO2 Emissionen durch geplante Projekte</p>
+                    <div className={classes.LegendProjects}></div><p>CO2-Emissionen durch geplante Projekte</p>
                 </div>
             </div>
         </div>

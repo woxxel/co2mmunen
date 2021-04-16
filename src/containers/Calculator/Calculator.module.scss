@@ -1,7 +1,5 @@
 .Calculator {
     width: 100%;
-    // max-width: 800px;
-    margin: auto;
 }
 
 .AddContent {
@@ -18,19 +16,29 @@
     // flex-direction: row;
     // height: 360px;
     width: 100%;
-    padding: 1rem;
+    // padding: 1rem;
 }
 .OverviewContent {
     position: relative;
     display: flex;
-    flex-direction: row;
+    flex-flow: row wrap;
     max-width: 800px;
     margin: auto;
 }
 
 .TextSummary {
     margin: auto 0;
-    font-weight: bold
+    font-weight: bold;
+    padding: 2rem 0 4rem 0;
+    // width: 40%;
+
+    & tr {
+        margin-bottom: 20px;
+    }
+
+    & td {
+        text-align: right;
+    }
 }
 
 .BtnAddProject {
@@ -50,11 +58,37 @@
 }
 
 .Header {
-    display: flex;
-    flex-direction: row;
-    align-items: baseline;
-    height: 200px;
+    position: relative;
+    // display: flex;
+    // flex-direction: row;
+    // align-items: baseline;
+    width: 100%;
     max-width: 800px;
+    height: 300px;
     margin: auto;
-    padding: 0 2rem;
+    // padding: 0;
+    background-image: url("/assets/images/Tengen_BG.jpg");
+    background-size: cover;
+    background-position: center;
+}
+
+.HeaderLogo {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    padding: 10px 10px 0 0;
+    background-color: rgba(white,0.7);
+}
+
+.HeaderText {
+    position: absolute;
+    left: 0;
+    top: 0.5rem;
+    width: 70%;
+    background-color: rgba(white,0.7);
+    & h1 {
+        padding: 0.5rem;
+        margin: 0;
+    }
+    // paddingLeft: '0'
 }

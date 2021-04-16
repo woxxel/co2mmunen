@@ -4,7 +4,7 @@ import { BrowserRouter } from 'react-router-dom';
 import Calculator from './containers/Calculator/Calculator'
 import Layout from './hoc/Layout/Layout'
 
-import './App.css';
+import './App.module.scss';
 
 function App() {
   return (

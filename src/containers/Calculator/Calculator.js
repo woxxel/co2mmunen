@@ -37,6 +37,11 @@ class Calculator extends Component {
                 <p>CO2 Kosten: xxxx</p>
             </div>;
         let plannedContent = null;
+
+        // <div className={classes.AddContent}>
+        //     <h1>Projektplanung</h1>
+        //
+        // </div>
         plannedContent = Object.keys(this.props.proj).map(id => {
             if ((this.props.proj[id].costType==='planned')) {
                 return <PlannedContent
@@ -47,7 +52,9 @@ class Calculator extends Component {
                 return null;
             }
         })
-
+        let projectsAdded = !plannedContent.reduce((acc,el) => el===null & acc, true)
+        // console.log(plannedContent)
+        // console.log(element)
         // console.log(this.state)
         // if (this.state.clickedID) {
         //     modalContent = <div>
@@ -74,17 +81,12 @@ class Calculator extends Component {
                     {modalContent}
                 </Modal>
 
-                <p><em>Diese Anwendung ist derzeit in der Entwicklungsphase und wird zunaechst durch keinerlei wissenschaftliche Daten gespeist. Sie haben Interesse an unserer Arbeit? Kontaktieren Sie uns: <a href='mailto::info@co2mmunen.de'>info@co2mmunen.de</a></em></p>
+                <p><em>Diese Anwendung ist derzeit in der Entwicklungsphase und wird zunächst durch keinerlei wissenschaftliche Daten gespeist. Sie haben Interesse an unserer Arbeit? Kontaktieren Sie uns: <a href='mailto::info@co2mmunen.de'>info@co2mmunen.de</a></em></p>
                 <div className={classes.Header}>
-                        <h1 style={{
-                            width: '60%',
-                            padding: 'auto',
-                            paddingLeft: '0'
-                        }}>Steuerungstool fuer Klima-bewusste Gemeinden</h1>
-                    <div
-                        style={{
-                            margin: 'auto 0'
-                        }}>
+                    <div className={classes.HeaderText}>
+                        <h1>Steuerungstool für Klimabewusste Gemeinden</h1>
+                    </div>
+                    <div className={classes.HeaderLogo}>
                         <img src='/assets/images/TengenLogo.png' alt='city Logo'/>
                     </div>
                 </div>
@@ -92,19 +94,33 @@ class Calculator extends Component {
                     <div className={classes.OverviewContent}>
                     {co2Display}
                     <div className={classes.TextSummary}>
-                        <p>Gesamtes CO2 Budget fuer 2022: {this.props.budget} kT</p>
-                        <p>Bereits genutztes CO2-Budget: {this.props.currentBudget} kT</p>
-                        <p>Noch verfuegbares CO2-Budget: {this.props.budget-this.props.currentBudget} kT</p>
+                        <table>
+                            <tbody>
+                                <tr>
+                                    <td>Gesamtes CO2-Budget für 2022:</td>
+                                    <td>{this.props.budget} kT</td>
+                                </tr>
+                                <tr>
+                                    <td>Bereits genutztes CO2-Budget:</td>
+                                    <td>{this.props.currentBudget} kT</td>
+                                </tr>
+                                <tr>
+                                    <td>Noch verfügbares CO2-Budget:</td>
+                                    <td>{this.props.budget-this.props.currentBudget} kT</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                     <button
                     className={classes.BtnAddProject}
-                    onClick={this.props.addProject}>Projekt hinzufuegen</button>
+                    onClick={this.props.addProject}>Projekt hinzufügen</button>
                     </div>
                 </div>
+                {projectsAdded ?
                 <div className={classes.AddContent}>
                     <h1>Projektplanung</h1>
                     {plannedContent}
-                </div>
+                </div> : null}
             </div>
         )
     }
