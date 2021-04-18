@@ -92,28 +92,28 @@ class Calculator extends Component {
                 </div>
                 <div className={classes.Overview}>
                     <div className={classes.OverviewContent}>
-                    {co2Display}
-                    <div className={classes.TextSummary}>
-                        <table>
-                            <tbody>
-                                <tr>
-                                    <td>Gesamtes CO2-Budget für 2022:</td>
-                                    <td>{this.props.budget} kT</td>
-                                </tr>
-                                <tr>
-                                    <td>Bereits genutztes CO2-Budget:</td>
-                                    <td>{this.props.currentBudget} kT</td>
-                                </tr>
-                                <tr>
-                                    <td>Noch verfügbares CO2-Budget:</td>
-                                    <td>{this.props.budget-this.props.currentBudget} kT</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <button
-                    className={classes.BtnAddProject}
-                    onClick={this.props.addProject}>Projekt hinzufügen</button>
+                        {co2Display}
+                        <div className={classes.TextSummary}>
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <td>Gesamtes CO2-Budget für 2022:</td>
+                                        <td>{this.props.budget} kT</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Bereits genutztes CO2-Budget:</td>
+                                        <td>{this.props.currentBudget} kT</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Noch verfügbares CO2-Budget:</td>
+                                        <td>{this.props.budget-this.props.currentBudget} kT</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <button
+                        className={classes.BtnAddProject}
+                        onClick={this.props.addProject}>Projekt hinzufügen</button>
                     </div>
                 </div>
                 {projectsAdded ?

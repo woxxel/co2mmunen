@@ -29,7 +29,7 @@ const CO2Display = (props) => {
     })
 
     return (
-        <div >
+        <div style={{margin: 'auto'}}>
             <div
                 className={classes.Pie}>
                 {segments}
